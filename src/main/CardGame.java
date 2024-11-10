@@ -1,4 +1,5 @@
-package Software;
+package main;
+
 public class CardGame{
 
     private List<Player> players;
