@@ -1,9 +1,12 @@
 package main;
 
+
+import java.util.List;
+
 public class CardGame{
 
     private List<Player> players;
-    private List<Deck> decks;
+    private List<CardDeck> decks;
     private List<Card> cardPack;
     private int n;
 
