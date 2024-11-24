@@ -1,7 +1,7 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.Collections;
+// import java.util.ArrayList;
+// import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class CardDeck {
     // Returns a copy of the current list of cards in the deck
     // Synchronized to ensure thread safety when accessing the cards
     public synchronized List<Card> getCards() {
-        return new ArrayList<>(cards);
+        return new LinkedList<>(cards);
     }
 
     // Adds a card to the end of the deck
@@ -45,14 +45,19 @@ public class CardDeck {
     }
 
     // Generates a sorted string representation of the deck's contents
+    // @Override
+    // public synchronized String toString() {
+    //     // Create a copy of the cards list and sort it
+    //     List<Card> sortedCards = new ArrayList<>(cards);
+    //     Collections.sort(sortedCards, (card1, card2) -> 
+    //         Integer.compare(card1.getValue(), card2.getValue()));
+        
+    //     // Return the deck's number and its sorted contents as a string
+    //     return "deck" + deckNumber + " contents: " + sortedCards;
+    // }
+
     @Override
     public synchronized String toString() {
-        // Create a copy of the cards list and sort it
-        List<Card> sortedCards = new ArrayList<>(cards);
-        Collections.sort(sortedCards, (card1, card2) -> 
-            Integer.compare(card1.getValue(), card2.getValue()));
-        
-        // Return the deck's number and its sorted contents as a string
-        return "deck" + deckNumber + " contents: " + sortedCards;
+        return "deck" + deckNumber + " contents: " + cards.toString();
     }
 }
