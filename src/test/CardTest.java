@@ -1,5 +1,6 @@
 package test;
 
+import main.Card;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +13,14 @@ public class CardTest {
     
     @Test
     void testNegativeValueThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(IllegalArgumentException.class,() -> {
             new Card(-1);
         });
     }
+
+    @Test
+    public void testToString() {
+        Card card = new Card(10);
+        assertEquals("10", card.toString(), "toString should return value as string");
+    }
+}
