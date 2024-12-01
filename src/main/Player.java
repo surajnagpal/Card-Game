@@ -7,21 +7,21 @@ import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Player implements Runnable {
-    private final int preferredValue;
-    private final List<Card> hand;
+    private final int prefValue;
+    public final List<Card> hand;
     private final int playerId;
     private final CardDeck leftDeck;
     private final CardDeck rightDeck;
-    private final ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock playerLock = new ReentrantLock();
     private final String outputFile;
     private final CardGame game;
 
     public Player(int playerId, CardDeck leftDeck, CardDeck rightDeck, 
-                 int preferredValue, List<Card> initialHand, CardGame game) {
+                 int prefValue, List<Card> initialHand, CardGame game) {
         this.playerId = playerId;
         this.leftDeck = leftDeck;
         this.rightDeck = rightDeck;
-        this.preferredValue = preferredValue;
+        this.prefValue = prefValue;
         this.hand = new ArrayList<>(initialHand);
         this.outputFile = "player" + playerId + "_output.txt";
         this.game = game;
@@ -68,7 +68,7 @@ public class Player implements Runnable {
     }
 
     public void playTurn() {
-        lock.lock();
+        playerLock.lock();
         try {
             // Draw card from left deck
             Card drawn = leftDeck.drawCard();
@@ -86,14 +86,14 @@ public class Player implements Runnable {
                 logAction("player " + playerId + " current hand is " + formatHand());
             }
         } finally {
-            lock.unlock();
+            playerLock.unlock();
         }
     }
 
-    private Card chooseCardToDiscard() {
+    public Card chooseCardToDiscard() {
         // First try to discard a non-preferred card
         for (Card card : hand) {
-            if (card.getValue() != preferredValue) {
+            if (card.getValue() != prefValue) {
                 return card;
             }
         }
@@ -144,48 +144,6 @@ public class Player implements Runnable {
     } // Correctly closing the run() method
 } // Correctly closing the Player class
 
-// public void play() {
-//     // This method will handle the playing logic with a time limit
-//     while (!Thread.currentThread().isInterrupted()) {
-//         playTurn();
-//         if (hasWinningHand()) {
-//             logAction("player " + playerId + " wins");
-//             break;
-//         }
-//     }
-// }
-
-// @Override
-// public String toString() {
-//     return "Player " + playerId + " with hand " + hand;
-// }
-
-
-// public Card drawCard(){
-// return (Card) hand;
-// }
-
-// public Card discardCard(){
-// return (Card) hand;
-// }
-
-// public boolean checkWin(){
-//   if(hand != null){
-//     int counter = 1;
-//     for(int i = 0; i<=3; i++)
-//     {
-//       if(hand.get(i).equals(playerId)){
-//           counter++;
-//       }
-//     }
-//     if(counter == 4){
-//       return true;
-//     }
-//     return false;
-  
-//   }
-// return false;
-// }
 
 
 // public void play(){

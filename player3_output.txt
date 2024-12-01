@@ -1,0 +1,52 @@
+player 3 initial hand 4 6 2 5
+player 3 draws a 6 from deck 3
+player 3 discards a 4 to deck 4
+player 3 current hand is 6 2 5 6
+player 3 draws a 1 from deck 3
+player 3 discards a 6 to deck 4
+player 3 current hand is 2 5 6 1
+player 3 draws a 6 from deck 3
+player 3 discards a 2 to deck 4
+player 3 current hand is 5 6 1 6
+player 3 draws a 7 from deck 3
+player 3 discards a 5 to deck 4
+player 3 current hand is 6 1 6 7
+player 3 draws a 3 from deck 3
+player 3 discards a 6 to deck 4
+player 3 current hand is 1 6 7 3
+player 3 draws a 1 from deck 3
+player 3 discards a 1 to deck 4
+player 3 current hand is 6 7 3 1
+player 3 draws a 4 from deck 3
+player 3 discards a 6 to deck 4
+player 3 current hand is 7 3 1 4
+player 3 draws a 4 from deck 3
+player 3 discards a 7 to deck 4
+player 3 current hand is 3 1 4 4
+player 3 draws a 5 from deck 3
+player 3 discards a 1 to deck 4
+player 3 current hand is 3 4 4 5
+player 3 draws a 7 from deck 3
+player 3 discards a 4 to deck 4
+player 3 current hand is 3 4 5 7
+player 3 draws a 0 from deck 3
+player 3 discards a 4 to deck 4
+player 3 current hand is 3 5 7 0
+player 3 draws a 0 from deck 3
+player 3 discards a 5 to deck 4
+player 3 current hand is 3 7 0 0
+player 3 draws a 6 from deck 3
+player 3 discards a 7 to deck 4
+player 3 current hand is 3 0 0 6
+player 3 draws a 7 from deck 3
+player 3 discards a 0 to deck 4
+player 3 current hand is 3 0 6 7
+player 3 draws a 3 from deck 3
+player 3 discards a 0 to deck 4
+player 3 current hand is 3 6 7 3
+player 3 draws a 6 from deck 3
+player 3 discards a 6 to deck 4
+player 3 current hand is 3 7 3 6
+player 3 draws a 5 from deck 3
+player 3 discards a 7 to deck 4
+player 3 current hand is 3 3 6 5

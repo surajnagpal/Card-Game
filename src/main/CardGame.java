@@ -11,25 +11,25 @@ import java.util.Random;
 
 public class CardGame {
     private final List<Player> players = new ArrayList<>();
-    private final List<CardDeck> decks = new ArrayList<>();
-    private final List<Card> cardPack = new ArrayList<>();
+    private final List<CardDeck> currDecks = new ArrayList<>();
+    private final List<Card> cards = new ArrayList<>();
     private static final Random RANDOM = new Random();
     private final int n;
-    private volatile boolean gameEnded = false;
+    private volatile boolean gameEnded                                                                                                                                                                                                                                                                                                       = false;
 
     public CardGame(int n, List<Card> cardPack) {
         this.n = n;
-        this.cardPack.addAll(cardPack);
+        this.cards.addAll(cardPack);
         
         // Initialize decks
         for (int i = 1; i <= n; i++) {
-            decks.add(new CardDeck(i));
+            currDecks.add(new CardDeck(i));
         }
         
         // Initialize players with correct decks and preferred values
         for (int i = 1; i <= n; i++) {
-            CardDeck leftDeck = decks.get((i - 1) % n);
-            CardDeck rightDeck = decks.get(i % n);
+            CardDeck leftDeck = currDecks.get((i - 1) % n);
+            CardDeck rightDeck = currDecks.get(i % n);
             players.add(new Player(i, leftDeck, rightDeck, i, new ArrayList<>(), this));
         }
     }
@@ -38,14 +38,14 @@ public class CardGame {
         // Distribute 4 cards to each player
         int playerIndex = 0;
         for (int i = 0; i < 4 * n; i++) {
-            players.get(playerIndex).addToHand(cardPack.remove(0));
+            players.get(playerIndex).addToHand(cards.remove(0));
             playerIndex = (playerIndex + 1) % n;
         }
 
         // Distribute remaining cards to decks
         int deckIndex = 0;
-        while (!cardPack.isEmpty()) {
-            decks.get(deckIndex).addCard(cardPack.remove(0));
+        while (!cards.isEmpty()) {
+            currDecks.get(deckIndex).addCard(cards.remove(0));
             deckIndex = (deckIndex + 1) % n;
         }
     }
@@ -93,7 +93,7 @@ public class CardGame {
     }
 
     private void writeDeckStates() {
-        decks.forEach(deck -> {
+        currDecks.forEach(deck -> {
             try (FileWriter writer = new FileWriter("deck" + deck.getDeckNumber() + "_output.txt")) {
                 writer.write(deck.toString());
             } catch (IOException e) {
@@ -128,7 +128,7 @@ public class CardGame {
         int n = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
     
-        System.out.print("Please enter location of pack to load (or type 'generate' to create a new pack): ");
+        System.out.print("Please enter location of pack to load ('generate' to create a new pack): ");
         String packFile = scanner.nextLine();
     
         List<Card> cardPack = new ArrayList<>();
