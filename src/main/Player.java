@@ -71,17 +71,17 @@ public class Player implements Runnable {
         lock.lock();
         try {
             // Draw card from left deck
-            Card drawn = leftDeck.drawCard();
-            if (drawn != null) {
-                hand.add(drawn);
-                logAction("player " + playerId + " draws a " + drawn.getValue() + 
+            Card drawnCard = leftDeck.drawCard();
+            if (drawnCard != null) {
+                hand.add(drawnCard);
+                logAction("player " + playerId + " draws a " + drawnCard.getValue() + 
                          " from deck " + leftDeck.getDeckNumber());
 
                 // Choose card to discard (non-preferred value if possible)
-                Card discard = chooseCardToDiscard();
-                hand.remove(discard);
-                rightDeck.addCard(discard);
-                logAction("player " + playerId + " discards a " + discard.getValue() + 
+                Card discardCard = chooseCardToDiscard();
+                hand.remove(discardCard);
+                rightDeck.addCard(discardCard);
+                logAction("player " + playerId + " discards a " + discardCard.getValue() + 
                          " to deck " + rightDeck.getDeckNumber());
                 logAction("player " + playerId + " current hand is " + formatHand());
             }

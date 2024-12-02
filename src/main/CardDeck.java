@@ -44,36 +44,17 @@ public class CardDeck {
         return cards.removeFirst();
     }
 
-    // Generates a sorted string representation of the deck's contents
-    // @Override
-    // public synchronized String toString() {
-    //     List<Card> sortedCards = new ArrayList<>(cards);
-    //     Collections.sort(sortedCards, (card1, card2) -> 
-    //         Integer.compare(card1.getValue(), card2.getValue()));
-    //     StringBuilder result = new StringBuilder();
-    //     result.append("deck").append(deckNumber).append(" contents: ");
-    //     for (int i = 0; i < sortedCards.size(); i++) {
-    //         result.append(sortedCards.get(i));     
-    //         if (i < sortedCards.size() - 1) {      
-    //             result.append(" ");                 
-    //         }
-    //     }
-    //     return result.toString();
-    // }
     @Override
     public synchronized String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("deck").append(deckNumber).append(" contents:");
+        
         List<Card> sortedCards = new ArrayList<>(cards);
         Collections.sort(sortedCards, (card1, card2) -> 
             Integer.compare(card1.getValue(), card2.getValue()));
         
-        StringBuilder result = new StringBuilder();
-        result.append("deck")
-            .append(deckNumber)
-            .append(" contents:");  // Note: removed space after colon
-        
         for (Card card : sortedCards) {
-            result.append(" ")        // Add space before each number
-                .append(card.getValue());
+            result.append(" ").append(card.getValue());
         }
         
         return result.toString();

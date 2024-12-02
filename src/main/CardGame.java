@@ -13,6 +13,7 @@ public class CardGame {
     private final List<Player> players = new ArrayList<>();
     private final List<CardDeck> decks = new ArrayList<>();
     private final List<Card> cardPack = new ArrayList<>();
+    private final List<Thread> playerThreads = new ArrayList<>(); // Added by suraj
     private static final Random RANDOM = new Random();
     private final int n;
     private volatile boolean gameEnded = false;
@@ -55,7 +56,8 @@ public class CardGame {
             gameEnded = true;
             System.out.println("player " + winner.getId() + " wins");
             // Interrupt all player threads
-            players.forEach(player -> Thread.currentThread().interrupt());
+            // players.forEach(player -> Thread.currentThread().interrupt()); // Changed by suraj
+            playerThreads.forEach(Thread::interrupt); // replaced by suraj
         }
     }
 
@@ -72,23 +74,23 @@ public class CardGame {
         }
 
         // Start player threads
-        List<Thread> threads = new ArrayList<>();
+        // List<Thread> threads = new ArrayList<>(); // Removed by suraj
         for (Player player : players) {
             Thread t = new Thread(player);
-            threads.add(t);
+            playerThreads.add(t);
             t.start();
         }
 
         // Wait for game to end
-        for (Thread t : threads) {
+        for (Thread t : playerThreads) {
             try {
                 t.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
+                Thread.currentThread().interrupt();
+                break;
             }
-        }
-
-        // Write final deck states
+        } 
         writeDeckStates();
     }
 
